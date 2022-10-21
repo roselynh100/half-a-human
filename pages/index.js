@@ -3,6 +3,8 @@ import { Box, Button, Checkbox, FormControlLabel, FormGroup, TextField, Typograp
 import Header from '../src/components/Header'
 import styles from '../styles/Home.module.css'
 
+import Chart from '../src/components/Chart'
+
 export default function Home() {
 
   const [name, checkName] = useState(true)
@@ -58,6 +60,9 @@ export default function Home() {
         <TextField type='number' variant='standard' value={traitsNum} onChange={(e) => setTraitsNum(e.target.value)} label='Number of Traits' disabled={!traits} />
       </FormGroup>
       <Button variant='contained' onClick={generate}>Generate</Button>
+      <Box sx={{width: 500}}>
+        <Chart />
+      </Box>
     </Box>
   )
 }
