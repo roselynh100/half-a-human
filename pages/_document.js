@@ -8,6 +8,8 @@ export default class MyDocument extends Document {
       <Html lang='en'>
         <Head>
           <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Allura&display=swap' />
+          <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito&display=swap' />
+          <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap' />
           {this.props.emotionStyleTags}
         </Head>
         <body>

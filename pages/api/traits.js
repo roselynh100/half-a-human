@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   let traitsArray = []
   let traitNum
   for (let i = 0; i < num; i++) {
-    traitNum = Math.floor(Math.random() * 441)
+    traitNum = Math.floor(Math.random() * 406)
     traitsArray.push(traits[traitNum])
   }
   res.status(200).json(traitsArray)

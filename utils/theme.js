@@ -8,12 +8,23 @@ export const theme = createTheme({
   },
   typography: {
     allVariants: {
-      color: '#77ACA2'
+      color: '#77ACA2',
+      fontFamily: [
+        'Nunito',
+      ].join(','),
+      fontSize: 20
     },
-    h2: {
+    h1: {
       fontFamily: [
         'Allura',
-      ].join(',')
+      ].join(','),
+      fontSize: 75
+    },
+    h3: {
+      fontFamily: [
+        'Abril Fatface',
+      ].join(','),
+      fontSize: 48
     }
   }
 })
