@@ -13,21 +13,24 @@ const Human = () => {
   return (
     <Box className={styles.container}>
       <Typography>You&apos;ve created:</Typography>
-      <Typography variant='h3'>{human?.name ? human.name : 'A nameless human'}</Typography>
-      <Typography sx={{ my: 1, fontStyle: 'italic' }}>
+      <Typography variant='h3' sx={{ mb: 1 }}>{human?.name ? human.name : 'A nameless human'}</Typography>
+      <Typography sx={{ mb: 4, fontStyle: 'italic' }}>
         {human?.age && 'Age ' + human.age}
         {human?.age && human?.country ? ', ' : ''}
         {human?.country && 'from ' + human.country}
       </Typography>
-      <Box sx={{ width: 500 }}>
+      <Box sx={{ width: 450, mt: -5, mb: -3 }}>
         <HumanChart />
       </Box>
-      <motion.div
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <Link href='/'><Button variant='outlined'>Generate another human</Button></Link>
-      </motion.div>
+      <Typography sx={{ mt: 2 }}>Everything else is up to you!</Typography>
+      <Box sx={{ mt: 2 }}>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <Link href='/'><Button variant='outlined'>Generate another human</Button></Link>
+        </motion.div>
+      </Box>
     </Box>
   )
 }

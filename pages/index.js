@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Box, Button, Checkbox, FormControlLabel, FormGroup, TextField, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
 import Header from '../src/components/Header'
@@ -10,16 +11,19 @@ import { theme } from '../utils/theme'
 
 export default function Home() {
 
+  const router = useRouter()
+
   const [name, checkName] = useState(true)
   const [age, checkAge] = useState(true)
   const [country, checkCountry] = useState(true)
   const [traits, checkTraits] = useState(true)
   const [traitsNum, setTraitsNum] = useState(5)
 
-  const [human, setHuman] = useContext(HumanContext)
+  const [human, setHuman] = useContext(HumanContext)  
 
   const generate = async () => {
     let generatedHuman = {}
+    if (!name && !age && !country && !traits) return alert('Please pick something to generate!')
     if (name) {
       const nameRes = await fetch('/api/name')
       const data = await nameRes.json()  
@@ -51,25 +55,25 @@ export default function Home() {
     }
     console.log('our human is:', generatedHuman)
     setHuman(generatedHuman)
+    router.push('/human')
   }
 
   return (
     <Box className={styles.container}>
       <Header />
-      <Typography variant='h5'>A character a day keeps the writer&apos;s block away.</Typography>
-      <Typography variant='h5'>Select all you want to generate:</Typography>
+      <Typography variant='h5' sx={{ textAlign: 'center' }}>A character a day keeps the writer&apos;s block away. <br />Select all you want to generate:</Typography>
       <FormGroup sx={{ mt: 2, mb: 6 }}>
         <FormControlLabel control={<Checkbox checked={name} onClick={() => checkName(!name)} />} label='Name' />
         <FormControlLabel control={<Checkbox checked={age} onClick={() => checkAge(!age)} />} label='Age' />
         <FormControlLabel control={<Checkbox checked={country} onClick={() => checkCountry(!country)} />} label='Country' />
         <FormControlLabel control={<Checkbox checked={traits} onClick={() => checkTraits(!traits)} />} label='Traits' />
-        <TextField type='number' variant='standard' value={traitsNum} onChange={(e) => setTraitsNum(e.target.value)} label='Number of Traits' disabled={!traits} sx={{ input: {color: theme.palette.primary.main } }} />
+        <TextField type='number' variant='standard' value={traitsNum} onChange={(e) => setTraitsNum(e.target.value)} label='Number of Traits' disabled={!traits} sx={{ input: {color: theme.palette.primary.main }, mt: 1 }} />
       </FormGroup>
       <motion.div
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <Link href='/human'><Button variant='contained' onClick={generate} sx={{ color: 'white' }}>Generate</Button></Link>
+        <Button variant='contained' onClick={generate} sx={{ color: 'white' }}>Generate</Button>
       </motion.div>
     </Box>
   )

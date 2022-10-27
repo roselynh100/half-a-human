@@ -7,6 +7,7 @@ import { theme } from '../utils/theme'
 import createEmotionCache from '../utils/createEmotionCache'
 import HumanContext from '../src/components/HumanContext'
 import '../styles/globals.css'
+import styles from '../styles/Home.module.css'
 
 
 const clientSideEmotionCache = createEmotionCache()
@@ -31,6 +32,7 @@ function MyApp({
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -200, opacity: 0 }}
               transition={{ duration: 1 }}
+              className={styles.container}
             >
               <Component {...pageProps} />
             </motion.div>

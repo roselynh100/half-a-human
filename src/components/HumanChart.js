@@ -26,20 +26,15 @@ const HumanChart = () =>{
 
   console.log('human is:', human)
 
-  let humanTraitsValues = []
-
-  useEffect(() => {
-    for (let i in human?.traits) {
-      humanTraitsValues.push(Math.floor(Math.random() * 9) + 1)
-    }
-  }, [])
+  let traitArray = human.traits ? human.traits.map(el => el.trait) : []
+  let traitValues = human.traits ? human.traits.map(el => el.value) : []
 
   const data = {
-    labels: human?.traits,
+    labels: traitArray,
     datasets: [
       {
         label: `${human?.name}\'s Key Qualities`,
-        data: humanTraitsValues,
+        data: traitValues,
         backgroundColor: 'rgba(119, 172, 162, 0.2)',
         borderColor: 'rgb(119, 172, 162)',
         borderWidth: 2

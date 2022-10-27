@@ -4,5 +4,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: fit-content;
+  margin: auto;
+  padding: 10px;
   /* background-color: #031926; */
  }
