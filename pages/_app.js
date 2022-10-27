@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import { ThemeProvider } from '@mui/material'
 import { CacheProvider } from '@emotion/react'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -22,9 +23,13 @@ function MyApp({
   const router = useRouter()
 
   return (
-    <HumanContext.Provider value={[human, setHuman]}>
-      <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={theme}>
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={theme}>
+        <Head>
+          <title>Half A Human</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </Head>
+        <HumanContext.Provider value={[human, setHuman]}>
           <AnimatePresence mode='wait'>
             <motion.div
               key={router.route}
@@ -37,9 +42,9 @@ function MyApp({
               <Component {...pageProps} />
             </motion.div>
           </AnimatePresence>
-        </ThemeProvider>
-      </CacheProvider>
-    </HumanContext.Provider>
+        </HumanContext.Provider>
+      </ThemeProvider>
+    </CacheProvider>
   )
 }
 

@@ -26,7 +26,7 @@ export default function Home() {
     if (!name && !age && !country && !traits) return alert('Please pick something to generate!')
     if (name) {
       const nameRes = await fetch('/api/name')
-      const data = await nameRes.json()  
+      const data = await nameRes.json()
       generatedHuman.name = data.name
     }
     if (age) generatedHuman.age = Math.floor(Math.random() * 75) + 5
@@ -55,6 +55,10 @@ export default function Home() {
     }
     console.log('our human is:', generatedHuman)
     setHuman(generatedHuman)
+    await fetch('/api/humans', {
+      method: 'POST',
+      body: JSON.stringify({ human: generatedHuman })
+    })
     router.push('/human')
   }
 
@@ -69,12 +73,20 @@ export default function Home() {
         <FormControlLabel control={<Checkbox checked={traits} onClick={() => checkTraits(!traits)} />} label='Traits' />
         <TextField type='number' variant='standard' value={traitsNum} onChange={(e) => setTraitsNum(e.target.value)} label='Number of Traits' disabled={!traits} sx={{ input: {color: theme.palette.primary.main }, mt: 1 }} />
       </FormGroup>
-      <motion.div
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <Button variant='contained' onClick={generate} sx={{ color: 'white' }}>Generate</Button>
-      </motion.div>
+      <Box sx={{ display: 'flex' }}>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <Button variant='contained' onClick={generate} sx={{ color: 'white', mr: 3 }}>Generate</Button>
+        </motion.div>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <Link href='/recent'><Button variant='outlined'>View recent</Button></Link>
+        </motion.div>
+      </Box>
     </Box>
   )
 }
