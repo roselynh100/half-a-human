@@ -14,13 +14,12 @@ const Recent = () => {
 
   useEffect(() => {
     const getHumans = async () => {
-      const humanRes = await fetch('http://localhost:3000/api/humans')
+      const url = '/api/humans'
+      const humanRes = await fetch(url)
       setData(await humanRes.json())
     }
     getHumans()
   }, [])
-
-  console.log('data:)', data)
 
   return (
     <Box className={styles.container}>

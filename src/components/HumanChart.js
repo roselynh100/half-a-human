@@ -24,7 +24,7 @@ ChartJS.register(
 const HumanChart = () =>{
   const [human, setHuman] = useContext(HumanContext)
 
-  console.log('human is:', human)
+  // console.log('human is:', human)
 
   let traitArray = human.traits ? human.traits.map(el => el.trait) : []
   let traitValues = human.traits ? human.traits.map(el => el.value) : []

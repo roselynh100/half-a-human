@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import Link from 'next/link'
 import { Box, Button, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
@@ -13,7 +13,7 @@ const Human = () => {
   return (
     <Box className={styles.container}>
       <Typography>You&apos;ve created:</Typography>
-      <Typography variant='h3' sx={{ mb: 1 }}>{human?.name ? human.name : 'A nameless human'}</Typography>
+      <Typography variant='h3' sx={{ mb: 1 }}>{human?.name ?? 'A nameless human'}</Typography>
       <Typography sx={{ mb: 4, fontStyle: 'italic' }}>
         {human?.age && 'Age ' + human.age}
         {human?.age && human?.country ? ', ' : ''}

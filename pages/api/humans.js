@@ -13,7 +13,6 @@ export default async function handler(req, res) {
   case 'POST':
     console.log('you want to post a new human!')
     const body = JSON.parse(req.body)
-    console.log(body)
     body.human.createdAt = new Date()
     const human = await db.collection('humans').insertOne(body.human)
     res.status(200).json(human)

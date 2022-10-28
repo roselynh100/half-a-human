@@ -53,7 +53,7 @@ export default function Home() {
       const data = await traitsRes.json()
       generatedHuman.traits = data
     }
-    console.log('our human is:', generatedHuman)
+    // console.log('our human is:', generatedHuman)
     setHuman(generatedHuman)
     await fetch('/api/humans', {
       method: 'POST',
