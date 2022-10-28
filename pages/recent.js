@@ -32,7 +32,7 @@ const Recent = () => {
       </Box>
       <Typography variant='h5' sx={{ textAlign: 'center', mb: 2 }}>View the most recent humans!</Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch', width: 700 }}>
-        {data.map((human, index) => {
+        {data?.map((human, index) => {
           return <HumanCard key={index} name={human.name} age={human.age} country={human.country} traits={human.traits} />
         })}
       </Box>

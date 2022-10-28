@@ -25,8 +25,8 @@ const HumanChart = () =>{
 
   // console.log('human is:', human)
 
-  let traitArray = human?.traits ? human?.traits.map(el => el.trait) : []
-  let traitValues = human?.traits ? human?.traits.map(el => el.value) : []
+  let traitArray = human?.traits ? human?.traits?.map(el => el.trait) : []
+  let traitValues = human?.traits ? human?.traits?.map(el => el.value) : []
 
   const data = {
     labels: traitArray,
