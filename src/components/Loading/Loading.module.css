@@ -1,0 +1,27 @@
+.loadingBackground {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(355, 355, 355, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.loadingContainer {
+  display: flex;
+  width: 400px;
+  height: 60px;
+  justify-content: space-around;
+}
+
+.loadingCircle {
+  display: block;
+  width: 35px;
+  height: 35px;
+  background-color: #77ACA2;
+  border-radius: 50%;
+}

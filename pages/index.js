@@ -2,8 +2,9 @@ import { useState, useContext } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Box, Button, Checkbox, FormControlLabel, FormGroup, TextField, Typography } from '@mui/material'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import Header from '../src/components/Header'
+import Loading from '../src/components/Loading/Loading'
 import styles from '../styles/Home.module.css'
 
 import HumanContext from '../src/components/HumanContext'
@@ -12,6 +13,7 @@ import { theme } from '../utils/theme'
 export default function Home() {
 
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
 
   const [name, checkName] = useState(true)
   const [age, checkAge] = useState(true)
@@ -22,22 +24,34 @@ export default function Home() {
   const [human, setHuman] = useContext(HumanContext)  
 
   const generate = async () => {
+    setLoading(true)
     let generatedHuman = {}
+
     if (!name && !age && !country && !traits) return alert('Please pick something to generate!')
+
     if (name) {
       const nameRes = await fetch('/api/name')
       const data = await nameRes.json()
       generatedHuman.name = data.name
     }
+
     if (age) generatedHuman.age = Math.floor(Math.random() * 68) + 7
+
     if (country) {
       if (generatedHuman.name) {
         const countryRes = await fetch('/api/country', {
           method: 'POST',
           body: JSON.stringify({ name: generatedHuman.name })
         })
-        const data = await countryRes.json()
-        generatedHuman.country = data.name.common
+        try {
+          const data = await countryRes.json()
+          generatedHuman.country = data.name.common
+        } catch (err) {
+          console.log(err)
+          alert('Sorry, an error occurred! Please try again.')
+          setLoading(false)
+          return
+        }
       }
       else {
         const countryRes = await fetch('/api/country')
@@ -45,6 +59,7 @@ export default function Home() {
         generatedHuman.country = data.name.common
       }
     }
+
     if (traits) {
       const traitsRes = await fetch('/api/traits', {
         method: 'POST',
@@ -53,13 +68,17 @@ export default function Home() {
       const data = await traitsRes.json()
       generatedHuman.traits = data
     }
+
     // console.log('our human is:', generatedHuman)
     setHuman(generatedHuman)
+
     await fetch('/api/humans', {
       method: 'POST',
       body: JSON.stringify({ human: generatedHuman })
     })
-    router.push('/human')
+
+    setTimeout(() => setLoading(false), 2000)
+    setTimeout(() => router.push('/human'), 2500)
   }
 
   return (
@@ -87,6 +106,17 @@ export default function Home() {
           <Link href='/recent'><Button variant='outlined'>View recent</Button></Link>
         </motion.div>
       </Box>
+      <AnimatePresence>
+        { loading &&
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Loading />
+          </motion.div>
+        }
+      </AnimatePresence>
     </Box>
   )
 }
