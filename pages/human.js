@@ -15,14 +15,14 @@ const Human = () => {
       <Typography>You&apos;ve created:</Typography>
       <Typography variant='h3' sx={{ mb: 1 }}>{human?.name ?? 'A nameless human'}</Typography>
       <Typography sx={{ mb: 4, fontStyle: 'italic' }}>
-        {human?.age && 'Age ' + human.age}
+        {human?.age && 'Age ' + human?.age}
         {human?.age && human?.country ? ', ' : ''}
-        {human?.country && 'from ' + human.country}
+        {human?.country && 'from ' + human?.country}
       </Typography>
       <Box sx={{ width: 450, mt: -5, mb: -3 }}>
         <HumanChart />
       </Box>
-      { human.traits ? <Typography sx={{ mt: 1 }}>Everything else is up to you!</Typography> : <Typography sx={{ mt: 5 }}>Everything else is up to you!</Typography>}
+      { human?.traits ? <Typography sx={{ mt: 1 }}>Everything else is up to you!</Typography> : <Typography sx={{ mt: 5 }}>Everything else is up to you!</Typography>}
       <Box sx={{ mt: 2 }}>
         <motion.div
           whileHover={{ scale: 1.1 }}
