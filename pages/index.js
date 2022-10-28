@@ -29,7 +29,7 @@ export default function Home() {
       const data = await nameRes.json()
       generatedHuman.name = data.name
     }
-    if (age) generatedHuman.age = Math.floor(Math.random() * 75) + 5
+    if (age) generatedHuman.age = Math.floor(Math.random() * 68) + 7
     if (country) {
       if (generatedHuman.name) {
         const countryRes = await fetch('/api/country', {

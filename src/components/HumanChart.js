@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useContext } from 'react'
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -8,7 +8,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-import Chart from 'chart.js/auto'
 import { Radar } from 'react-chartjs-2'
 import HumanContext from './HumanContext'
 
@@ -26,8 +25,8 @@ const HumanChart = () =>{
 
   // console.log('human is:', human)
 
-  let traitArray = human.traits ? human.traits.map(el => el.trait) : []
-  let traitValues = human.traits ? human.traits.map(el => el.value) : []
+  let traitArray = human?.traits ? human?.traits.map(el => el.trait) : []
+  let traitValues = human?.traits ? human?.traits.map(el => el.value) : []
 
   const data = {
     labels: traitArray,
